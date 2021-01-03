@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Button } from "./Button";
+import { ControlPanel } from "./ControlPanel";
 
 export const App = () => {
+  const [isMusicPlaying, setIsMusicPlaying] = React.useState(false);
+
   return (
-    <Controls>
-      <Button>play music</Button>
-      <Button>start alarm</Button>
-    </Controls>
+    <>
+      <ControlPanel
+        isMusicPlaying={isMusicPlaying}
+        setIsMusicPlaying={setIsMusicPlaying}
+      />
+    </>
   );
 };
-
-const Controls = styled.div`
-  display: flex;
-`;
