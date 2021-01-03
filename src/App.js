@@ -6,12 +6,14 @@ import { AlarmModal } from "./AlarmModal";
 import { times } from "./utils";
 
 export const App = () => {
-  const [alarmTime, setAlarmTime] = React.useState({
-    hour: times.hours[0],
-    minute: times.minutes[0],
-  });
+  const [alarmTime, setAlarmTime] = React.useState(
+    JSON.parse(localStorage.getItem("alarm-time")) || {
+      hour: times.hours[0],
+      minute: times.minutes[0],
+    }
+  );
   const [isMusicPlaying, setIsMusicPlaying] = React.useState(false);
-  const [isAlarmActive, setIsAlarmActive] = React.useState(true);
+  const [isAlarmActive, setIsAlarmActive] = React.useState(false);
 
   const audioRef = React.useRef();
 

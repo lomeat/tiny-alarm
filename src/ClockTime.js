@@ -10,7 +10,11 @@ export const ClockTime = ({ alarmTime, setAlarmTime }) => {
   const [selectTimeUnits, setSelectTimeUnits] = React.useState(getHours());
 
   const closeModal = (name, value) => {
-    setAlarmTime((state) => ({ ...state, [name]: value }));
+    setAlarmTime((state) => {
+      const newState = { ...state, [name]: value };
+      localStorage.setItem("alarm-time", JSON.stringify(newState));
+      return newState;
+    });
     setIsTimeSelecting(false);
   };
 
