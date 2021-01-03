@@ -4,7 +4,7 @@ export const TimeValueButton = styled.button`
   border: 0;
   background: transparent;
   outline: none;
-  font-size: 200px;
+  font-size: inherit;
 
   &:hover {
     cursor: pointer;

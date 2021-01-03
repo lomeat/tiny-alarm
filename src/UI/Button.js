@@ -10,8 +10,8 @@ export const Button = styled.button`
 
   &:hover {
     cursor: pointer;
-    box-shadow: inset 5px 5px rgba(0, 0, 0, 0.5), 5px 5px rgba(0, 0, 0, 0.5);
-    text-shadow: 5px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 5px 5px rgba(0, 0, 0, 0.4), 5px 5px rgba(0, 0, 0, 0.4);
+    text-shadow: 5px 5px rgba(0, 0, 0, 0.4);
   }
 
   :last-child {

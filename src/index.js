@@ -29,6 +29,7 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
     font-weight: bold;
     transition: 0.2s ease;
+    box-sizing: border-box;
   }
 `;
 

@@ -20,7 +20,7 @@ const Wrapper = styled.label`
   background: transparent;
 
   &:hover {
-    text-shadow: 5px 5px rgba(0, 0, 0, 0.5);
+    text-shadow: 5px 5px rgba(0, 0, 0, 0.4);
     cursor: pointer;
   }
 `;
