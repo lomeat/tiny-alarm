@@ -5,36 +5,25 @@ import { Button } from "./UI/Button";
 import { ChooseMusicButton } from "./UI/ChooseMusicButton";
 import sample from "./music/Click me to browse music.mp3";
 
-export const ControlPanel = ({ isMusicPlaying, setIsMusicPlaying }) => {
+export const ControlPanel = ({
+  isMusicPlaying,
+  toggleMusicPlaying,
+  audioRef,
+}) => {
   const [music, setMusic] = React.useState(sample);
   const [musicName, setMusicName] = React.useState("Click me to browse music");
 
-  const audioRef = React.useRef();
-
   const uploadMusic = (e) => {
     e.preventDefault();
-    audioRef.current.pause();
-    audioRef.current.currentTime = 0;
 
     const musicURL = URL.createObjectURL(e.target.files[0]);
 
-    setIsMusicPlaying(false);
     setMusic(musicURL);
     setMusicName(e.target.files[0].name.split(".mp3")[0]);
 
     e.onend = () => {
       URL.revokeObjectURL(e.target.src);
     };
-  };
-
-  const toggleMusicPlaying = () => {
-    if (isMusicPlaying) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    } else {
-      audioRef.current.play();
-    }
-    setIsMusicPlaying((state) => !state);
   };
 
   return (
