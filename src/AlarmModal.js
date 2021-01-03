@@ -3,14 +3,15 @@ import styled from "styled-components";
 
 import { Modal } from "./ui/Modal";
 import { Button } from "./ui/Button";
-import { getDifferenceBetweenTimes } from "./utils";
 
-export const AlarmModal = ({ time, toggleAlarmStart, audioRef }) => {
+export const AlarmModal = ({
+  time,
+  toggleAlarmModal,
+  stopMusic,
+  playMusic,
+}) => {
   const [currentTime, setCurrentTime] = React.useState("");
-  const [alarmTime, setAlarmTime] = React.useState(
-    `${time.hour}:${time.minute}:00`
-  );
-  const [restTime, setRestTime] = React.useState("07:34:02");
+  const alarmTime = `${time.hour}:${time.minute}:00`;
 
   React.useEffect(() => {
     const clock = setInterval(() => updateCurrentTime(), 1000);
@@ -27,22 +28,27 @@ export const AlarmModal = ({ time, toggleAlarmStart, audioRef }) => {
   };
 
   const checkAlarmClock = () => {
-    const rest = getDifferenceBetweenTimes(currentTime, alarmTime);
-    setRestTime(rest.join(":"));
-  };
-
-  const closeModal = () => {
-    setRestTime(null);
-    toggleAlarmStart();
-    if (audioRef.currentTime > 0) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+    console.log(currentTime, alarmTime);
+    if (currentTime === alarmTime) {
+      playMusic();
     }
   };
 
+  const closeModal = () => {
+    toggleAlarmModal();
+    stopMusic();
+  };
+
+  const viewTimeHM = currentTime.split(":").slice(0, 2).join(":");
+  const viewTimeS = currentTime.split(":").slice(2).join("");
+
   return (
     <Modal background="black">
-      <TimeText>{restTime}</TimeText>
+      <TimeWrapper>
+        <TimeS style={{ opacity: 0 }}>{viewTimeS}</TimeS>
+        <TimeHM>{viewTimeHM}</TimeHM>
+        <TimeS>{viewTimeS}</TimeS>
+      </TimeWrapper>
       <Button
         onClick={closeModal}
         style={{ color: "#555", borderColor: "#555" }}
@@ -53,7 +59,22 @@ export const AlarmModal = ({ time, toggleAlarmStart, audioRef }) => {
   );
 };
 
-const TimeText = styled.span`
-  font-size: 300px;
+const TimeWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 100px;
+`;
+
+const TimeHM = styled.span`
+  font-size: 360px;
   color: #ddd;
+  line-height: 360px;
+`;
+
+const TimeS = styled.span`
+  padding-left: 10px;
+  font-size: 140px;
+  line-height: 190px;
+  color: #555;
 `;

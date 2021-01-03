@@ -15,17 +15,22 @@ export const App = () => {
 
   const audioRef = React.useRef();
 
-  const toggleMusicPlaying = () => {
-    if (isMusicPlaying) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    } else {
-      audioRef.current.play();
-    }
-    setIsMusicPlaying((state) => !state);
+  const playMusic = () => {
+    audioRef.current.play();
+    setIsMusicPlaying(true);
   };
 
-  const toggleAlarmStart = () => {
+  const stopMusic = () => {
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
+    setIsMusicPlaying(false);
+  };
+
+  const toggleMusicPlaying = () => {
+    isMusicPlaying ? stopMusic() : playMusic();
+  };
+
+  const toggleAlarmModal = () => {
     setIsAlarmActive((state) => !state);
   };
 
@@ -36,13 +41,14 @@ export const App = () => {
         isMusicPlaying={isMusicPlaying}
         toggleMusicPlaying={toggleMusicPlaying}
         audioRef={(e) => (audioRef.current = e)}
-        toggleAlarmStart={toggleAlarmStart}
+        toggleAlarmModal={toggleAlarmModal}
       />
       {isAlarmActive && (
         <AlarmModal
           time={alarmTime}
-          toggleAlarmStart={toggleAlarmStart}
-          audioRef={(el) => (audioRef.current = el)}
+          toggleAlarmModal={toggleAlarmModal}
+          stopMusic={stopMusic}
+          playMusic={playMusic}
         />
       )}
     </>
