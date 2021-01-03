@@ -14,11 +14,19 @@ WebFont.load({
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
+    background: #f15a51;
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
 
   * {
     font-family: "Barlow Condensed", sans-serif;
     user-select: none;
+    color: #ffe3e1;
+    outline: none;
   }
 `;
 

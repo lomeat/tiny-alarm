@@ -1,10 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
+import { Button } from "./Button";
+
 export const App = () => {
   return (
-    <div>
-      <h1>Hello there</h1>
-    </div>
+    <Controls>
+      <Button>play music</Button>
+      <Button>start alarm</Button>
+    </Controls>
   );
 };
+
+const Controls = styled.div`
+  display: flex;
+`;
