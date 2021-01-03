@@ -3,24 +3,14 @@ import styled from "styled-components";
 
 import { TimeValueButton } from "./ui/TimeValueButton";
 import { SelectTimeModal } from "./SelectTimeModal";
+import { getHours, times } from "./utils";
 
-const times = {
-  hours: Array.from({ length: 24 }, (a, i) => (i < 10 ? "0" + i : i)),
-  minutes: Array.from({ length: 12 }, (a, i) =>
-    i * 5 < 10 ? "0" + i * 5 : i * 5
-  ),
-};
-
-export const ClockTime = () => {
-  const [currentTime, setCurrentTime] = React.useState({
-    hour: times.hours[0],
-    minute: times.minutes[0],
-  });
+export const ClockTime = ({ alarmTime, setAlarmTime }) => {
   const [isTimeSelecting, setIsTimeSelecting] = React.useState(false);
-  const [selectTimeUnits, setSelectTimeUnits] = React.useState(times.hours);
+  const [selectTimeUnits, setSelectTimeUnits] = React.useState(getHours());
 
   const closeModal = (name, value) => {
-    setCurrentTime((state) => ({ ...state, [name]: value }));
+    setAlarmTime((state) => ({ ...state, [name]: value }));
     setIsTimeSelecting(false);
   };
 
@@ -33,11 +23,11 @@ export const ClockTime = () => {
     <>
       <Wrapper>
         <TimeValueButton onClick={() => openModal("hours")}>
-          {currentTime.hour}
+          {alarmTime.hour}
         </TimeValueButton>
         {":"}
         <TimeValueButton onClick={() => openModal("minutes")}>
-          {currentTime.minute}
+          {alarmTime.minute}
         </TimeValueButton>
       </Wrapper>
 

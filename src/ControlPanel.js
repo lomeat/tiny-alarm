@@ -9,6 +9,7 @@ export const ControlPanel = ({
   isMusicPlaying,
   toggleMusicPlaying,
   audioRef,
+  toggleAlarmStart,
 }) => {
   const [music, setMusic] = React.useState(sample);
   const [musicName, setMusicName] = React.useState("Click me to browse music");
@@ -31,7 +32,7 @@ export const ControlPanel = ({
         <Button onClick={toggleMusicPlaying}>
           {isMusicPlaying ? "stop" : "play"} music
         </Button>
-        <Button>start alarm</Button>
+        <Button onClick={toggleAlarmStart}>start alarm</Button>
       </ButtonsWrapper>
       <ChooseWrapper>
         <ChooseMusicButton musicName={musicName} onChange={uploadMusic} />
