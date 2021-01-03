@@ -14,6 +14,19 @@ export const App = () => {
   );
   const [isMusicPlaying, setIsMusicPlaying] = React.useState(false);
   const [isAlarmActive, setIsAlarmActive] = React.useState(false);
+  const [currentTime, setCurrentTime] = React.useState("");
+
+  React.useEffect(() => {
+    const clock = setInterval(() => updateCurrentTime(), 1000);
+
+    return () => {
+      clearInterval(clock);
+    };
+  });
+
+  const updateCurrentTime = () => {
+    setCurrentTime(new Date().toLocaleTimeString("en-US", { hour12: false }));
+  };
 
   const audioRef = React.useRef();
 
@@ -51,6 +64,7 @@ export const App = () => {
           toggleAlarmModal={toggleAlarmModal}
           stopMusic={stopMusic}
           playMusic={playMusic}
+          currentTime={currentTime}
         />
       )}
     </>

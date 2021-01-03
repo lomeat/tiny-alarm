@@ -9,23 +9,17 @@ export const AlarmModal = ({
   toggleAlarmModal,
   stopMusic,
   playMusic,
+  currentTime,
 }) => {
-  const [currentTime, setCurrentTime] = React.useState("");
   const alarmTime = `${time.hour}:${time.minute}:00`;
 
   React.useEffect(() => {
-    const clock = setInterval(() => updateCurrentTime(), 1000);
     const interval = setInterval(() => checkAlarmClock(), 1000);
 
     return () => {
-      clearInterval(clock);
       clearInterval(interval);
     };
   });
-
-  const updateCurrentTime = () => {
-    setCurrentTime(new Date().toLocaleTimeString("en-US", { hour12: false }));
-  };
 
   const checkAlarmClock = () => {
     console.log(currentTime, alarmTime);
@@ -45,7 +39,6 @@ export const AlarmModal = ({
   return (
     <Modal background="black">
       <TimeWrapper>
-        <TimeS style={{ opacity: 0 }}>{viewTimeS}</TimeS>
         <TimeHM>{viewTimeHM}</TimeHM>
         <TimeS>{viewTimeS}</TimeS>
       </TimeWrapper>
@@ -70,6 +63,7 @@ const TimeHM = styled.span`
   font-size: 360px;
   color: #ddd;
   line-height: 360px;
+  padding-left: 160px;
 `;
 
 const TimeS = styled.span`
@@ -77,4 +71,5 @@ const TimeS = styled.span`
   font-size: 140px;
   line-height: 190px;
   color: #555;
+  width: 140px;
 `;
