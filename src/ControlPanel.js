@@ -17,7 +17,6 @@ export const ControlPanel = ({
     e.preventDefault();
 
     const musicURL = URL.createObjectURL(e.target.files[0]);
-
     setMusic(musicURL);
     setMusicName(e.target.files[0].name.split(".mp3")[0]);
 

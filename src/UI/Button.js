@@ -5,7 +5,6 @@ export const Button = styled.button`
   padding: 16px 40px;
   text-transform: uppercase;
   font-size: 36px;
-  transition: 0.2s ease;
   font-weight: bold;
   border: 7px solid #ffe3e1;
 

@@ -13,10 +13,9 @@ export const ChooseMusicButton = ({ musicName, onChange }) => {
 };
 
 const Wrapper = styled.label`
-  font-size: 40px;
+  font-size: 38px;
   text-overflow: ellipsis;
   text-align: center;
-  transition: 0.2s ease;
   border: 0px;
   background: transparent;
 

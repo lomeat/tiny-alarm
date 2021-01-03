@@ -1,6 +1,7 @@
 import React from "react";
 
 import { ControlPanel } from "./ControlPanel";
+import { Clock } from "./Clock";
 
 export const App = () => {
   const [isMusicPlaying, setIsMusicPlaying] = React.useState(false);
@@ -19,6 +20,7 @@ export const App = () => {
 
   return (
     <>
+      <Clock />
       <ControlPanel
         isMusicPlaying={isMusicPlaying}
         toggleMusicPlaying={toggleMusicPlaying}
