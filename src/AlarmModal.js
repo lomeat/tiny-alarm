@@ -3,7 +3,13 @@ import styled from "styled-components";
 
 import { Modal } from "./ui/Modal";
 import { Button } from "./ui/Button";
-import { getRestTime, getTimeHM, getTimeS } from "./utils";
+import {
+  getRestTime,
+  getTimeHM,
+  getTimeS,
+  convertZeroNumbersToActualTimes,
+  convertTimeStrToArr,
+} from "./utils";
 
 export const AlarmModal = ({
   alarmTime,
@@ -17,15 +23,18 @@ export const AlarmModal = ({
   React.useEffect(() => {
     const timer = setInterval(() => updateCurrentTime(), 1000);
     return () => {
-      clearInterval(timer);
+      if (restTime === "00:00:00") {
+        clearInterval(timer);
+        playMusic();
+      }
     };
   });
 
   const updateCurrentTime = () => {
-    setRestTime(getRestTime(alarmTimeStr));
-    if (restTime === "00:00:00") {
-      playMusic();
-    }
+    const convertedAlarmTime = convertZeroNumbersToActualTimes(
+      convertTimeStrToArr(alarmTimeStr)
+    ).join(":");
+    setRestTime(getRestTime(convertedAlarmTime));
   };
 
   const closeModal = () => {

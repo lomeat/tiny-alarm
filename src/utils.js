@@ -14,11 +14,12 @@ export const times = {
   minutes: formatTimes(getMinutes()),
 };
 
+export const convertZeroNumbersToActualTimes = (arr) => {
+  return arr.map((a, i) => (a === 0 ? (i === 0 ? 24 : 60) : a));
+};
+
 export const convertTimeStrToArr = (timeString) => {
-  return timeString
-    .split(":")
-    .map((a) => convertStrToNum(a))
-    .map((a, i) => (a === 0 ? (i === 0 ? 24 : 60) : a));
+  return timeString.split(":").map((a) => convertStrToNum(a));
 };
 
 export const convertArrToTimeStr = (timeArr) => {
@@ -46,6 +47,22 @@ export const getRestTime = (endTime) => {
       restArr.push(newValue);
     } else {
       restArr.push(endArr[a] - startArr[a]);
+    }
+
+    if (endArr[0] === startArr[0] && endArr[1] < startArr[1]) {
+      restArr[0] = 23;
+    }
+
+    if (restArr[0] === 1 && restArr[1] === 0 && restArr[2] === 0) {
+      restArr[0] = 0;
+    }
+
+    if (restArr[2] === 0 && restArr[1] === 1) {
+      restArr[1] = 0;
+    }
+
+    if (restArr[0] === 0 && restArr[1] === 0 && restArr[2] === 1) {
+      return "00:00:00";
     }
   }
 
