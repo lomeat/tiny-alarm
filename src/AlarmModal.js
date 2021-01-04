@@ -17,14 +17,17 @@ export const AlarmModal = ({
   React.useEffect(() => {
     const timer = setInterval(() => {
       setRestTime(getRestTime(alarmTimeStr));
+      // setRestTime(getRestTime("07:52:40")); debug
+
+      if (restTime === "00:00:00") {
+        clearInterval(timer);
+        playMusic();
+        setRestTime("00:00:00");
+      }
     }, 1000);
 
     return () => {
-      if (restTime === "00:00:00") {
-        setRestTime("00:00:00");
-        playMusic();
-        clearInterval(timer);
-      }
+      clearInterval(timer);
     };
   });
 
