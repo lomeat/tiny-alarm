@@ -11,12 +11,8 @@ export const ControlPanel = ({
   audioRef,
   toggleAlarmModal,
 }) => {
-  const [music, setMusic] = React.useState(
-    localStorage.getItem("music") || sample
-  );
-  const [musicName, setMusicName] = React.useState(
-    localStorage.getItem("music-name") || "Click me to browse music"
-  );
+  const [music, setMusic] = React.useState(sample);
+  const [musicName, setMusicName] = React.useState("Click me to browse music");
 
   const uploadMusic = (e) => {
     e.preventDefault();
@@ -25,8 +21,6 @@ export const ControlPanel = ({
     const musicNewName = e.target.files[0].name.split(".mp3")[0];
     setMusic(musicURL);
     setMusicName(musicNewName);
-    localStorage.setItem("music", musicURL);
-    localStorage.setItem("music-name", musicNewName);
 
     e.onend = () => {
       URL.revokeObjectURL(e.target.src);
