@@ -3,13 +3,7 @@ import styled from "styled-components";
 
 import { Modal } from "./ui/Modal";
 import { Button } from "./ui/Button";
-import {
-  getRestTime,
-  getTimeHM,
-  getTimeS,
-  convertZeroNumbersToActualTimes,
-  convertTimeStrToArr,
-} from "./utils";
+import { getRestTime, getTimeHM, getTimeS } from "./utils";
 
 export const AlarmModal = ({
   alarmTime,
@@ -21,42 +15,31 @@ export const AlarmModal = ({
   const [restTime, setRestTime] = React.useState("");
 
   React.useEffect(() => {
-    const timer = setInterval(() => updateCurrentTime(), 1000);
+    const timer = setInterval(() => {
+      setRestTime(getRestTime(alarmTimeStr));
+    }, 1000);
+
     return () => {
       if (restTime === "00:00:00") {
-        clearInterval(timer);
+        setRestTime("00:00:00");
         playMusic();
+        clearInterval(timer);
       }
     };
   });
-
-  const updateCurrentTime = () => {
-    const convertedAlarmTime = convertZeroNumbersToActualTimes(
-      convertTimeStrToArr(alarmTimeStr)
-    ).join(":");
-    setRestTime(getRestTime(convertedAlarmTime));
-  };
 
   const closeModal = () => {
     toggleAlarmModal();
     stopMusic();
   };
 
-  const viewTimeHM = getTimeHM(restTime);
-  const viewTimeS = getTimeS(restTime);
-
   return (
     <Modal background="black">
       <TimeWrapper>
-        <TimeHM>{viewTimeHM}</TimeHM>
-        <TimeS>{viewTimeS}</TimeS>
+        <TimeHM>{getTimeHM(restTime)}</TimeHM>
+        <TimeS>{getTimeS(restTime)}</TimeS>
       </TimeWrapper>
-      <Button
-        onClick={closeModal}
-        style={{ color: "#555", borderColor: "#555" }}
-      >
-        reset alarm
-      </Button>
+      <StButton onClick={closeModal}>reset alarm</StButton>
     </Modal>
   );
 };
@@ -81,4 +64,9 @@ const TimeS = styled.span`
   line-height: 190px;
   color: #555;
   width: 140px;
+`;
+
+const StButton = styled(Button)`
+  color: #555;
+  border-color: #555;
 `;

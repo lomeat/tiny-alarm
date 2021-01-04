@@ -14,10 +14,6 @@ export const times = {
   minutes: formatTimes(getMinutes()),
 };
 
-export const convertZeroNumbersToActualTimes = (arr) => {
-  return arr.map((a, i) => (a === 0 ? (i === 0 ? 24 : 60) : a));
-};
-
 export const convertTimeStrToArr = (timeString) => {
   return timeString.split(":").map((a) => convertStrToNum(a));
 };
@@ -30,41 +26,15 @@ export const convertArrToTimeStr = (timeArr) => {
 };
 
 export const getRestTime = (endTime) => {
-  const startTime = new Date().toLocaleTimeString("en-US", {
-    hour12: false,
-  });
+  const startMills = Date.now();
+  const endMills = new Date(`Jan 04, 2077 ${endTime}`).getTime();
 
-  const startArr = convertTimeStrToArr(startTime);
-  const endArr = convertTimeStrToArr(endTime);
+  const restMills = endMills - startMills;
 
-  let restArr = [];
+  const h = Math.floor((restMills % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const m = Math.floor((restMills % (1000 * 60 * 60)) / (1000 * 60));
+  const s = Math.floor((restMills % (1000 * 60)) / 1000);
 
-  for (let a = 0; a < 3; a++) {
-    if (endArr[a] < startArr[a]) {
-      const hourDiff = endArr[a] + (24 - startArr[a]);
-      const minuteDiff = endArr[a] + (60 - startArr[a]);
-      const newValue = a === 0 ? hourDiff : minuteDiff;
-      restArr.push(newValue);
-    } else {
-      restArr.push(endArr[a] - startArr[a]);
-    }
-
-    if (endArr[0] === startArr[0] && endArr[1] < startArr[1]) {
-      restArr[0] = 23;
-    }
-
-    if (restArr[0] === 1 && restArr[1] === 0 && restArr[2] === 0) {
-      restArr[0] = 0;
-    }
-
-    if (restArr[2] === 0 && restArr[1] === 1) {
-      restArr[1] = 0;
-    }
-
-    if (restArr[0] === 0 && restArr[1] === 0 && restArr[2] === 1) {
-      return "00:00:00";
-    }
-  }
-
+  const restArr = [h, m, s];
   return convertArrToTimeStr(restArr);
 };
