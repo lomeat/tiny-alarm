@@ -3,27 +3,27 @@ import styled from "styled-components";
 
 import { Modal } from "./ui/Modal";
 import { Button } from "./ui/Button";
+import { getRestTime, getTimeHM, getTimeS } from "./utils";
 
 export const AlarmModal = ({
-  time,
+  alarmTime,
   toggleAlarmModal,
   stopMusic,
   playMusic,
-  currentTime,
 }) => {
-  const alarmTime = `${time.hour}:${time.minute}:00`;
+  const alarmTimeStr = `${alarmTime.hour}:${alarmTime.minute}:00`;
+  const [restTime, setRestTime] = React.useState("");
 
   React.useEffect(() => {
-    const interval = setInterval(() => checkAlarmClock(), 1000);
-
+    const timer = setInterval(() => updateCurrentTime(), 1000);
     return () => {
-      clearInterval(interval);
+      clearInterval(timer);
     };
   });
 
-  const checkAlarmClock = () => {
-    console.log(currentTime, alarmTime);
-    if (currentTime === alarmTime) {
+  const updateCurrentTime = () => {
+    setRestTime(getRestTime(alarmTimeStr));
+    if (restTime === "00:00:00") {
       playMusic();
     }
   };
@@ -33,8 +33,8 @@ export const AlarmModal = ({
     stopMusic();
   };
 
-  const viewTimeHM = currentTime.split(":").slice(0, 2).join(":");
-  const viewTimeS = currentTime.split(":").slice(2).join("");
+  const viewTimeHM = getTimeHM(restTime);
+  const viewTimeS = getTimeS(restTime);
 
   return (
     <Modal background="black">
