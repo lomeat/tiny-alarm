@@ -1,28 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-// import { Button } from "./ui/Button.js";
+import { Button } from "./ui/Button";
 import { ChooseMusicButton } from "./ui/ChooseMusicButton";
 import sample from "./music/Click me to browse music.mp3";
-
-export const Button = styled.button`
-  background: transparent;
-  padding: 16px 40px;
-  text-transform: uppercase;
-  font-size: 36px;
-  font-weight: bold;
-  border: 7px solid #ffe3e1;
-
-  &:hover {
-    cursor: pointer;
-    box-shadow: inset 5px 5px rgba(0, 0, 0, 0.4), 5px 5px rgba(0, 0, 0, 0.4);
-    text-shadow: 5px 5px rgba(0, 0, 0, 0.4);
-  }
-
-  :last-child {
-    margin-left: 20px;
-  }
-`;
 
 export const ControlPanel = ({
   isMusicPlaying,
