@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Button } from "./ui/Button";
-import { ChooseMusicButton } from "./ui/ChooseMusicButton";
+import { Button } from "./shared/Button";
+import { ChooseMusicButton } from "./shared/ChooseMusicButton";
 import sample from "./music/Click me to browse music.mp3";
 
 export const ControlPanel = ({

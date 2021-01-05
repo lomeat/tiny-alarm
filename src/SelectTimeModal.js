@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import { TimeValueButton } from "./ui/TimeValueButton";
-import { Modal } from "./ui/Modal";
+import { TimeValueButton } from "./shared/TimeValueButton";
+import { Modal } from "./shared/Modal";
 
 export const SelectTimeModal = ({ units, closeModal }) => {
   const unitName = units.length > 12 ? "hour" : "minute";

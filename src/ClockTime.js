@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { TimeValueButton } from "./ui/TimeValueButton";
+import { TimeValueButton } from "./shared/TimeValueButton";
 import { SelectTimeModal } from "./SelectTimeModal";
 import { getHours, times } from "./utils";
 

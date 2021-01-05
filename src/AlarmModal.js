@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Modal } from "./ui/Modal";
-import { Button } from "./ui/Button";
+import { Modal } from "./shared/Modal";
+import { Button } from "./shared/Button";
 import { getRestTime, getTimeHM, getTimeS } from "./utils";
 
 export const AlarmModal = ({
