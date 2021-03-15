@@ -1,5 +1,7 @@
 # Tiny Alarm
 
+![visitors](https://visitor-badge.laobi.icu/badge?page_id=lomeat.tiny-alarm)
+
 [Link to app](https://tiny-alarm.vercel.com/)
 
 Cute alarm app (only web) in minimalistic design
